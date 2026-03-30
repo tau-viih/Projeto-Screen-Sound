@@ -1,6 +1,7 @@
 # 🎧 Screen Sound API
-
 Sistema back-end para gerenciamento de músicas, artistas e bandas, inspirado em serviços de streaming.
+## Status do projeto: 🚧 Em desenvolvimento.
+---
 
 ## 📌 Sobre o projeto
 
