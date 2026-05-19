@@ -1,4 +1,4 @@
-﻿namespace ScreenSound.Modelos;
+﻿using ScreenSound.Modelos;
 
 internal class Album : IAvaliavel
 {
@@ -21,6 +21,11 @@ internal class Album : IAvaliavel
             if (notas.Count == 0) return 0;
             else return notas.Average(a => a.Nota);
         }
+    }
+
+    public Musica? ObterMusica(string nomeMusica)
+    {
+        return musicas.FirstOrDefault(m => m.Nome.Equals(nomeMusica));
     }
 
     public void AdicionarMusica(Musica musica)
