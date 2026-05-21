@@ -49,11 +49,10 @@ Diferente de plataformas tradicionais, o foco não é recomendação automática
 
 ## 🚀 Funcionalidades
 
-- 🎵 Cadastro de músicas
-- 👩‍🎤 Cadastro de artistas e bandas
-- ⭐ Avaliação de bandas
+- 🎵 Cadastro de bandas
+- 👩‍🎤 Cadastro de albuns e músicas
+- ⭐ Avaliação de bandas, albuns e músicas
 - 📋 Listagem de dados
-- ✏️ Edição de informações
 - ❌ Remoção de registros
 
 ---
