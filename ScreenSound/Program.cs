@@ -22,7 +22,6 @@ opcoes.Add(6, new MenuAvaliarAlbum());
 opcoes.Add(7, new MenuAvaliarMusica());
 opcoes.Add(8, new MenuExibirDetalhes());
 opcoes.Add(9, new MenuExcluirBanda());
-opcoes.Add(9, new MenuExcluirBanda());
 opcoes.Add(10, new MenuExcluirAlbum());
 opcoes.Add(11, new MenuExcluirMusica());
 opcoes.Add(-1, new MenuSair());
