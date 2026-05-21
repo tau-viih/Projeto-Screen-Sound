@@ -21,6 +21,7 @@ opcoes.Add(5, new MenuAvaliarBanda());
 opcoes.Add(6, new MenuAvaliarAlbum());
 opcoes.Add(7, new MenuAvaliarMusica());
 opcoes.Add(8, new MenuExibirDetalhes());
+opcoes.Add(9, new MenuExcluirBanda());
 opcoes.Add(-1, new MenuSair());
 
 void ExibirLogo()
@@ -48,6 +49,7 @@ void ExibirOpcoesDoMenu()
     Console.WriteLine("Digite 6 para avaliar um álbum");
     Console.WriteLine("Digite 7 para avaliar uma música de um álbum");
     Console.WriteLine("Digite 8 para exibir os detalhes de uma banda");
+    Console.WriteLine("Digite 9 para excluir uma banda");
     Console.WriteLine("Digite -1 para sair");
 
     Console.Write("\nDigite a sua opção: ");
