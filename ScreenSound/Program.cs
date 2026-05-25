@@ -58,17 +58,28 @@ void ExibirOpcoesDoMenu()
 
     Console.Write("\nDigite a sua opção: ");
     string opcaoEscolhida = Console.ReadLine()!;
-    int opcaoEscolhidaNumerica = int.Parse(opcaoEscolhida);
 
-    if (opcoes.ContainsKey(opcaoEscolhidaNumerica))
+    try
     {
-        Menu menuASerExibido = opcoes[opcaoEscolhidaNumerica];
-        menuASerExibido.Executar(bandasRegistradas);
-        if (opcaoEscolhidaNumerica > 0) ExibirOpcoesDoMenu();
+        int opcaoEscolhidaNumerica = int.Parse(opcaoEscolhida);
+
+        if (opcoes.ContainsKey(opcaoEscolhidaNumerica))
+        {
+            Menu menuASerExibido = opcoes[opcaoEscolhidaNumerica];
+            menuASerExibido.Executar(bandasRegistradas);
+            if (opcaoEscolhidaNumerica > 0) ExibirOpcoesDoMenu();
+        }
+        else
+        {
+            Console.WriteLine("Opção inválida");
+            ExibirOpcoesDoMenu();
+        }
     }
-    else
+    catch (FormatException)
     {
-        Console.WriteLine("Opção inválida");
+        Console.Clear();
+        Console.WriteLine("Opção inválida!");
+        ExibirOpcoesDoMenu();
     }
 }
 
