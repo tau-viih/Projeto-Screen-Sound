@@ -12,7 +12,9 @@ internal class MenuExcluirAlbum : Menu
         Console.Write("Digite o nome da banda: ");
         string nomeDaBanda = Console.ReadLine()!;
 
-        if (!bandasRegistradas.ContainsKey(nomeDaBanda))
+        var bandaEncontrada = bandasRegistradas.Keys.FirstOrDefault(k => k.Equals(nomeDaBanda, StringComparison.OrdinalIgnoreCase));
+
+        if (bandaEncontrada == null)
         {
             Console.WriteLine($"A banda {nomeDaBanda} não foi encontrada!");
             Thread.Sleep(4000);
@@ -20,16 +22,16 @@ internal class MenuExcluirAlbum : Menu
             return;
         }
 
-        Banda banda = bandasRegistradas[nomeDaBanda];
+        Banda banda = bandasRegistradas[bandaEncontrada];
         Console.Write("Digite o nome do álbum que deseja excluir: ");
         string nomeDoAlbum = Console.ReadLine()!;
 
-        Album? albumParaExcluir = banda.Albuns.FirstOrDefault(a => a.Nome == nomeDoAlbum);
+        Album? albumParaExcluir = banda.Albuns.FirstOrDefault(a => a.Nome.Equals(nomeDoAlbum, StringComparison.OrdinalIgnoreCase));
 
         if (albumParaExcluir != null)
         {
             banda.Albuns.Remove(albumParaExcluir);
-            Console.WriteLine($"O álbum {nomeDoAlbum} foi excluído com sucesso!");
+            Console.WriteLine($"O álbum {albumParaExcluir.Nome} foi excluído com sucesso!");
         }
         else
         {

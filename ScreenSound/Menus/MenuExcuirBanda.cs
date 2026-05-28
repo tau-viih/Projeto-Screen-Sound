@@ -12,10 +12,12 @@ internal class MenuExcluirBanda : Menu
         Console.Write("Digite o nome da banda que deseja excluir: ");
         string nomeDaBanda = Console.ReadLine()!;
 
-        if (bandasRegistradas.ContainsKey(nomeDaBanda))
+        var bandaEncontrada = bandasRegistradas.Keys.FirstOrDefault(k => k.Equals(nomeDaBanda, StringComparison.OrdinalIgnoreCase));
+
+        if (bandaEncontrada != null)
         {
-            bandasRegistradas.Remove(nomeDaBanda);
-            Console.WriteLine($"A banda {nomeDaBanda} foi excluída com sucesso!");
+            bandasRegistradas.Remove(bandaEncontrada);
+            Console.WriteLine($"A banda {bandaEncontrada} foi excluída com sucesso!");
         }
         else
         {
