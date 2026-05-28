@@ -12,7 +12,9 @@ internal class MenuExcluirMusica : Menu
         Console.Write("Digite o nome da banda: ");
         string nomeDaBanda = Console.ReadLine()!;
 
-        if (!bandasRegistradas.ContainsKey(nomeDaBanda))
+        var bandaEncontrada = bandasRegistradas.Keys.FirstOrDefault(k => k.Equals(nomeDaBanda, StringComparison.OrdinalIgnoreCase));
+
+        if (bandaEncontrada == null)
         {
             Console.WriteLine($"A banda {nomeDaBanda} não foi encontrada!");
             Thread.Sleep(4000);
@@ -20,11 +22,11 @@ internal class MenuExcluirMusica : Menu
             return;
         }
 
-        Banda banda = bandasRegistradas[nomeDaBanda];
+        Banda banda = bandasRegistradas[bandaEncontrada];
         Console.Write("Digite o nome do álbum: ");
         string nomeDoAlbum = Console.ReadLine()!;
 
-        Album? album = banda.Albuns.FirstOrDefault(a => a.Nome == nomeDoAlbum);
+        Album? album = banda.Albuns.FirstOrDefault(a => a.Nome.Equals(nomeDoAlbum, StringComparison.OrdinalIgnoreCase));
 
         if (album == null)
         {
@@ -37,12 +39,12 @@ internal class MenuExcluirMusica : Menu
         Console.Write("Digite o nome da música que deseja excluir: ");
         string nomeDaMusica = Console.ReadLine()!;
 
-        Musica? musicaParaExcluir = album.Musicas.FirstOrDefault(m => m.Nome == nomeDaMusica);
+        Musica? musicaParaExcluir = album.Musicas.FirstOrDefault(m => m.Nome.Equals(nomeDaMusica, StringComparison.OrdinalIgnoreCase));
 
         if (musicaParaExcluir != null)
         {
             album.Musicas.Remove(musicaParaExcluir);
-            Console.WriteLine($"A música {nomeDaMusica} foi excluída com sucesso!");
+            Console.WriteLine($"A música {musicaParaExcluir.Nome} foi excluída com sucesso!");
         }
         else
         {

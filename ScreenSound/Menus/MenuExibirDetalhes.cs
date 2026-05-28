@@ -11,7 +11,9 @@ internal class MenuExibirDetalhes : Menu
         Console.Write("Digite o nome da banda que deseja conhecer melhor: ");
         string nomeDaBanda = Console.ReadLine()!;
 
-        if (!bandasRegistradas.ContainsKey(nomeDaBanda))
+        var bandaEncontrada = bandasRegistradas.Keys.FirstOrDefault(k => k.Equals(nomeDaBanda, StringComparison.OrdinalIgnoreCase));
+
+        if (bandaEncontrada == null)
         {
             Console.WriteLine($"\nA banda {nomeDaBanda} não foi encontrada!");
             Console.WriteLine("Digite uma tecla para voltar ao menu principal");
@@ -20,8 +22,8 @@ internal class MenuExibirDetalhes : Menu
             return;
         }
 
-        Banda banda = bandasRegistradas[nomeDaBanda];
-        Console.WriteLine($"\nA média da banda {nomeDaBanda} é {banda.Media:F2}.");
+        Banda banda = bandasRegistradas[bandaEncontrada];
+        Console.WriteLine($"\nA média da banda {bandaEncontrada} é {banda.Media:F2}.");
         Console.WriteLine($"\nDiscografia:");
 
         foreach (Album album in banda.Albuns)

@@ -12,7 +12,9 @@ internal class MenuRegistrarMusica : Menu
         Console.Write("Digite o nome da banda: ");
         string nomeDaBanda = Console.ReadLine()!;
 
-        if (!bandasRegistradas.ContainsKey(nomeDaBanda))
+        var bandaEncontrada = bandasRegistradas.Keys.FirstOrDefault(k => k.Equals(nomeDaBanda, StringComparison.OrdinalIgnoreCase));
+
+        if (bandaEncontrada == null)
         {
             Console.WriteLine($"\nA banda {nomeDaBanda} não foi encontrada!");
             Console.WriteLine("Digite uma tecla para voltar ao menu principal");
@@ -21,12 +23,14 @@ internal class MenuRegistrarMusica : Menu
             return;
         }
 
-        Banda banda = bandasRegistradas[nomeDaBanda];
+        Banda banda = bandasRegistradas[bandaEncontrada];
 
         Console.Write("Digite o título do álbum: ");
         string tituloAlbum = Console.ReadLine()!;
 
-        if (!banda.Albuns.Any(a => a.Nome.Equals(tituloAlbum)))
+        Album? album = banda.Albuns.FirstOrDefault(a => a.Nome.Equals(tituloAlbum, StringComparison.OrdinalIgnoreCase));
+
+        if (album == null)
         {
             Console.WriteLine($"\nO álbum {tituloAlbum} não foi encontrado!");
             Console.WriteLine("Digite uma tecla para voltar ao menu principal");
@@ -34,8 +38,6 @@ internal class MenuRegistrarMusica : Menu
             Console.Clear();
             return;
         }
-
-        Album album = banda.Albuns.First(a => a.Nome.Equals(tituloAlbum));
 
         Console.Write("Digite o nome da música: ");
         string nomeMusica = Console.ReadLine()!;

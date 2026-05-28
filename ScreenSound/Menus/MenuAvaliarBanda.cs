@@ -11,13 +11,16 @@ internal class MenuAvaliarBanda : Menu
         ExibirTituloDaOpcao("Avaliar banda");
         Console.Write("Digite o nome da banda que deseja avaliar: ");
         string nomeDaBanda = Console.ReadLine()!;
-        if (bandasRegistradas.ContainsKey(nomeDaBanda))
+        
+        var bandaEncontrada = bandasRegistradas.Keys.FirstOrDefault(k => k.Equals(nomeDaBanda, StringComparison.OrdinalIgnoreCase));
+
+        if (bandaEncontrada != null)
         {
-            Banda banda = bandasRegistradas[nomeDaBanda];
-            Console.Write($"Qual a nota que a banda {nomeDaBanda} merece: ");
+            Banda banda = bandasRegistradas[bandaEncontrada];
+            Console.Write($"Qual a nota que a banda {bandaEncontrada} merece: ");
             Avaliacao nota = Avaliacao.Parse(Console.ReadLine()!);
             banda.AdicionarNota(nota);
-            Console.WriteLine($"\nA nota {nota.Nota} foi registrada com sucesso para a banda {nomeDaBanda}");
+            Console.WriteLine($"\nA nota {nota.Nota} foi registrada com sucesso para a banda {bandaEncontrada}");
             Thread.Sleep(2000);
             Console.Clear();
         }

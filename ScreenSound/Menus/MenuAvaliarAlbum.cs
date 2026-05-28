@@ -12,18 +12,23 @@ internal class MenuAvaliarAlbum : Menu
         ExibirTituloDaOpcao("Avaliar álbum");
         Console.Write("Digite o nome da banda que deseja avaliar: ");
         string nomeDaBanda = Console.ReadLine()!;
-        if (bandasRegistradas.ContainsKey(nomeDaBanda))
+        
+        var bandaEncontrada = bandasRegistradas.Keys.FirstOrDefault(k => k.Equals(nomeDaBanda, StringComparison.OrdinalIgnoreCase));
+
+        if (bandaEncontrada != null)
         {
-            Banda banda = bandasRegistradas[nomeDaBanda];
+            Banda banda = bandasRegistradas[bandaEncontrada];
             Console.Write("Agora digite o título do álbum: ");
             string tituloAlbum = Console.ReadLine()!;
-            if (banda.Albuns.Any(a => a.Nome.Equals(tituloAlbum)))
+            
+            Album? album = banda.Albuns.FirstOrDefault(a => a.Nome.Equals(tituloAlbum, StringComparison.OrdinalIgnoreCase));
+
+            if (album != null)
             {
-                Album album = banda.Albuns.First(a => a.Nome.Equals(tituloAlbum));
-                Console.Write($"Qual a nota que o álbum merece {tituloAlbum} merece: ");
+                Console.Write($"Qual a nota que o álbum {album.Nome} merece: ");
                 Avaliacao nota = Avaliacao.Parse(Console.ReadLine()!);
                 album.AdicionarNota(nota);
-                Console.WriteLine($"\nA nota {nota.Nota} foi registrada com sucesso para o álbum {tituloAlbum}");
+                Console.WriteLine($"\nA nota {nota.Nota} foi registrada com sucesso para o álbum {album.Nome}");
                 Thread.Sleep(2000);
                 Console.Clear();
             }

@@ -13,7 +13,9 @@ internal class MenuAvaliarMusica : Menu
         Console.Write("Digite o nome da banda: ");
         string nomeDaBanda = Console.ReadLine()!;
 
-        if (!bandasRegistradas.ContainsKey(nomeDaBanda))
+        var bandaEncontrada = bandasRegistradas.Keys.FirstOrDefault(k => k.Equals(nomeDaBanda, StringComparison.OrdinalIgnoreCase));
+
+        if (bandaEncontrada == null)
         {
             Console.WriteLine($"\nA banda {nomeDaBanda} não foi encontrada!");
             Console.WriteLine("Digite uma tecla para voltar ao menu principal");
@@ -22,12 +24,14 @@ internal class MenuAvaliarMusica : Menu
             return;
         }
 
-        Banda banda = bandasRegistradas[nomeDaBanda];
+        Banda banda = bandasRegistradas[bandaEncontrada];
 
         Console.Write("Digite o nome do álbum: ");
         string nomeAlbum = Console.ReadLine()!;
 
-        if (!banda.Albuns.Any(a => a.Nome.Equals(nomeAlbum)))
+        Album? album = banda.Albuns.FirstOrDefault(a => a.Nome.Equals(nomeAlbum, StringComparison.OrdinalIgnoreCase));
+
+        if (album == null)
         {
             Console.WriteLine($"\nO álbum {nomeAlbum} não foi encontrado!");
             Console.WriteLine("Digite uma tecla para voltar ao menu principal");
@@ -35,8 +39,6 @@ internal class MenuAvaliarMusica : Menu
             Console.Clear();
             return;
         }
-
-        Album album = banda.Albuns.First(a => a.Nome.Equals(nomeAlbum));
 
         Console.WriteLine("\nMúsicas do álbum:");
         foreach (var tituloMusica in album.Musicas)
@@ -60,7 +62,6 @@ internal class MenuAvaliarMusica : Menu
         Console.Write($"Qual a nota que a música {nomeMusica} merece: ");
         Avaliacao nota = Avaliacao.Parse(Console.ReadLine()!);
         musica.AdicionarNota(nota);
-
         Console.WriteLine($"\nA nota {nota.Nota} foi registrada com sucesso para a música {nomeMusica}");
         Thread.Sleep(2000);
         Console.Clear();
